@@ -19,10 +19,11 @@ def str_list(list_value):
         elif i == len(list_value) -1:
             string = string + 'and ' + str(list_value[i])
         else: string = string + str(list_value[i]) + ', '
-    print(string)
+    return string
 
 # Test function with different values
 list1 = ['apples', 'bananas', 'tofu', 'cats']
 list2 = [1, 2, 3, 4, 5]
 list3 = [0, 'pi', 3.14, 'circles']
-str_list(list1)
+my_string = str_list(list1)
+print(my_string)
