@@ -31,16 +31,23 @@ text = str(pyperclip.paste())
 if text == '':
     print('There is nothing on your clipboard. Please copy something and try again.')   # Input validation
 elif len(text) > 0:                             # if text is not empty, look for matches
-    matches = []
+    phoneMatches = []
+    emailMatches = []
     for groups in phoneRegex.findall(text):     # Find phone matches and add to list
-        matches.append(groups[0])
+        phoneMatches.append(groups[0])
     for groups in emailRegex.findall(text):     # Find email matches and add to list
-        matches.append(groups[0])
+        emailMatches.append(groups[0])
     
-    if len(matches) > 0:                        # If there are matches, paste it for the user
-        text = '\n'.join(matches)
-        pyperclip.copy(text)
-        print("This is what I found: ")
-        print(pyperclip.paste())
+    if len(phoneMatches) > 0 or len(emailMatches) > 0:   # If there are matches, paste it for the user
+        if len(phoneMatches) > 0:
+            phoneNumbers = '\n'.join(phoneMatches)           # Copy phone numbers
+            pyperclip.copy(phoneNumbers)
+            print("These are the phone numbers I found: ")
+            print(pyperclip.paste())                         # Paste phone numbers
+        if len(emailMatches) > 0:
+            emails = '\n'.join(emailMatches)                 # Copy email addresses
+            pyperclip.copy(emails)
+            print("These are the email addresses I found: ")
+            print(pyperclip.paste())                         # Paste email addresses
     else:                                       # If there were no matches, tell the user
         print('Sorry, there were no matches.')
